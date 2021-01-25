@@ -1,0 +1,21 @@
+CREATE TABLE Publishers (
+                    publisherID int NOT NULL AUTO_INCREMENT,
+                    name varchar(200) NOT NULL,
+                    email varchar(100) NOT NULL,
+                    phone varchar(25) NOT NULL,
+                    address varchar(200),
+                    fdate datetime,
+                    description nvarchar(1000),
+                    PRIMARY KEY (publisherID) );
+
+CREATE TABLE Reviews (
+                    reviewID int NOT NULL AUTO_INCREMENT,
+                    userID int NOT NULL,
+                    bookID int NOT NULL,
+                    textContent text NOT NULL,
+                    date datetime NOT NULL,
+                    rating int NOT NULL,
+                    likes int NOT NULL,
+                    PRIMARY KEY (reviewID)
+                    ); 
+
