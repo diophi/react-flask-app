@@ -120,65 +120,65 @@ function App() {
               <div className={classes.toolbar} />
                 <ScrollToTop>
                   <Switch>
-                    <Route exact path="./login"
+                    <Route exact path="/login"
                       render={() => (
                         isUserLogged() ?
-                        <Redirect to="./" />: 
+                        <Redirect to="/" />: 
                         <SignIn setUser={setUserCallback}/>
                       )}
                     />
-                    <Route exact path="./signup"
+                    <Route exact path="/signup"
                       render={() => (
                         isUserLogged() ?
                         <Redirect to="/" />: 
                         <SignUp/>
                       )}
                     />
-                    <Route exact path="./" component={HomePage}/>
-                    <Route exact path="./search/:name" 
+                    <Route exact path="/" component={HomePage}/>
+                    <Route exact path="/search/:name" 
                       render={(props) => 
                         <SearchPage {...props}/>}
                     />
-                    <Route exact path="./books"
+                    <Route exact path="/books"
                       render={(props) => 
                         <AllBooksPage {...props}/>}
                     />
-                    <Route exact path="./publishers"
+                    <Route exact path="/publishers"
                       render={(props) => 
                         <AllPublishersPage {...props}/>}
                     />
-                    <Route exact path="./authors"
+                    <Route exact path="/authors"
                       render={(props) => 
                         <AllAuthorsPage {...props}/>}
                     />
-                    <Route exact path="./author/:id" 
+                    <Route exact path="/author/:id" 
                       render={(props) => 
                         <AuthorPage {...props}/>}
                     />
-                    <Route exact path="./publisher/:id" 
+                    <Route exact path="/publisher/:id" 
                       render={(props) => 
                         <PublisherPage {...props}/>}
                     />
-                    <Route exact path="./book/:id" 
+                    <Route exact path="/book/:id" 
                       render={(props) => 
                         <BookPage user={user} remountHeader={remountHeader} {...props}/>}
                     />
-                    <Route exact path="./genre/:genre" 
+                    <Route exact path="/genre/:genre" 
                       render={(props) => 
                         <GenreBooksPage {...props}/>}
                     />
-                    <Route exact path="./favorites" 
+                    <Route exact path="/favorites" 
                       render={(props) => 
                         (isUserLogged() ?
                           <FavoritePage user={user} remountHeader={remountHeader} {...props}/>:
                           <Redirect to="/" />
                         )}
                     />
-                    <Route exact path="./admin" 
+                    <Route exact path="/admin" 
                       render={() => 
                         (isUserLogged() && user.isAdmin ?
                         <AdminPage setUser={setUserCallback}/>:
-                        <Redirect to="./" />
+                        <Redirect to="/" />
                       )}
                     />
                   </Switch>
