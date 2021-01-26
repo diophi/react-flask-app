@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 let getGenres = async () => {
-    let genres = await fetch('/api/admin/getgenres')
+    let genres = await fetch('https://mostare1.pythonanywhere.com/api/admin/getgenres')
     .then(response => response.json())
     .then(data => data);
     
@@ -40,7 +40,7 @@ let getGenres = async () => {
 }
 
 let deleteGenres = async (id) => {
-    let result = await fetch('/api/admin/deletegenres/'+id)
+    let result = await fetch('https://mostare1.pythonanywhere.com/api/admin/deletegenres/'+id)
     .then(response => response)
     .then(data => data);
     
@@ -55,7 +55,7 @@ let updateGenres = async (data) => {
         body: JSON.stringify({...data})
     };
       
-    let results = fetch('api/admin/updategenres', requestOptions)
+    let results = fetch('https://mostare1.pythonanywhere.com/api/admin/updategenres', requestOptions)
     .then(response => response)
     .then(data => data);
 }
@@ -68,7 +68,7 @@ let addGenres = async (data) => {
         body: JSON.stringify({...data})
     };
       
-    let results = fetch('api/admin/addgenres', requestOptions)
+    let results = fetch('https://mostare1.pythonanywhere.com/api/admin/addgenres', requestOptions)
     .then(response => response)
     .then(data => data);
 }

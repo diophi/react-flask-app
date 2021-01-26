@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 
 
 let getBookGenres = async (bookID) => {
-    let genres = await fetch('/api/genres-book/'+bookID)
+    let genres = await fetch('https://mostare1.pythonanywhere.com/api/genres-book/'+bookID)
     .then(response => response.json())
     .then(data => data);
     
@@ -38,7 +38,8 @@ export default function AdditionalInfo(props) {
         },
         {
             title: 'Published on',
-            content: bookData.date,
+            content: bookData.date.substring(0, bookData.date.length - 12),
+            
         },
         {
             title: 'Genres',

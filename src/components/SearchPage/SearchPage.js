@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 let getResults = async (name) => {
-    let results = await fetch('/api/long-search/' + name)
+    let results = await fetch('https://mostare1.pythonanywhere.com/api/long-search/' + name)
     .then(response => response.json())
     .then(data => data );
     

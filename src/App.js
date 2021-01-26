@@ -72,7 +72,7 @@ function App() {
         body: JSON.stringify({ username: parsedUser.username, password: parsedUser.password})
       };
       
-      fetch('/api/login', requestOptions)
+      fetch('https://mostare1.pythonanywhere.com/api/login', requestOptions)
           .then(response => response.json())
           .then(data =>{ 
             data.length > 0 ? setUser(data[0]): setUser(unloggedUser());

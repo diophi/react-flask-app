@@ -27,7 +27,7 @@ export default function TemporaryDrawer(props) {
     const toggleDrawer = props.toggleDrawer;
 
     return (
-        <Drawer anchor={'left'} open={open} onClose={toggleDrawer}>
+        <Drawer anchor={'left'} open={open} onClose={toggleDrawer} style={{overflowX:'hidden'}}>
             <List style={{paddingTop:0, paddingBottom:0}}>
                 <ListItem>
                     <ListItemIcon> 

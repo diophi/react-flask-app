@@ -10,7 +10,7 @@ const addToFavorite = async (bookID, userID) => {
       body: JSON.stringify({ bookID: bookID, userID: userID})
     };
     
-    await fetch('/api/favorite/add', requestOptions);
+    await fetch('https://mostare1.pythonanywhere.com/api/favorite/add', requestOptions);
           
 }
 
@@ -21,12 +21,12 @@ const deleteFromFavorite = async (bookID, userID) => {
       body: JSON.stringify({ bookID: bookID, userID: userID})
     };
     
-    await fetch('/api/favorite/delete', requestOptions);
+    await fetch('https://mostare1.pythonanywhere.com/api/favorite/delete', requestOptions);
           
 }
 
 const checkFavorite = async (bookID, userID) => {
-    let isFavorite = await fetch('/api/favorite/check/' + bookID + "-" + userID)
+    let isFavorite = await fetch('https://mostare1.pythonanywhere.com/api/favorite/check/' + bookID + "-" + userID)
     .then(response => response.json())
     .then(data => data.length > 0 ? true : false);
     
@@ -46,15 +46,15 @@ export default function FavoriteButton(props){
 
 
     const handleAddFavorite = () => {
-        addToFavorite(bookData.bookID, user.userID);
+        addToFavorite(bookData.bookID, user.userID)
+        .then(() => props.remountHeader());
         setIsFavorite(true);
-        props.remountHeader();
     }
 
     const handleRemoveFavorite = () => {
-        deleteFromFavorite(bookData.bookID, user.userID);
+        deleteFromFavorite(bookData.bookID, user.userID)
+        .then(() => props.remountHeader());
         setIsFavorite(false);
-        props.remountHeader();
     }
 
     return(

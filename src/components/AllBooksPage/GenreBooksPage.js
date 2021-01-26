@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Grow from '@material-ui/core/Grow';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import BookTile from '../Layout/BookTile';
 
@@ -42,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 let getAllBooks = async (name) => {
-    let books = await fetch('/api/genres/'+name)
+    let books = await fetch('https://mostare1.pythonanywhere.com/api/genres/'+name)
     .then(response => response.json())
     .then(data => data);
     
@@ -65,6 +66,8 @@ export default function GenreBooksPage(props) {
     React.useEffect(() => {
         if(!open) setOpen(true);
         if(open) getAllBooks(genreName).then(data => setBooks(data));
+
+        return () => {setBooks(null);}
     },[open, genreName]);
 
     return(
@@ -72,7 +75,7 @@ export default function GenreBooksPage(props) {
             <Typography variant="h4" className={classes.title}>
                 All Books In {genreName}
             </Typography>
-            {books === null ? <></> :
+            {books === null ? <CircularProgress/> :
                 <>
                 {open?
                 <Grow in={true}>
@@ -93,7 +96,7 @@ export default function GenreBooksPage(props) {
                         ))}
                     </Grid>
                 </Grow>
-                :null
+                :<CircularProgress/>
                 }
                 </>
             }

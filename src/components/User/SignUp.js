@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 let checkUser = async (currUser) => {
-    let user = await fetch('/api/checkuser/'+ (currUser.username || ''))
+    let user = await fetch('https://mostare1.pythonanywhere.com/api/checkuser/'+ (currUser.username || ''))
     .then(response => response.json())
     .then(data => data);
 
@@ -82,7 +82,7 @@ let registerUser = async (currUser) => {
         })
       };
       
-    fetch('/api/signup', requestOptions)
+    fetch('https://mostare1.pythonanywhere.com/api/signup', requestOptions)
     .then(response => response);
 }
 

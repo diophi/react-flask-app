@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import BookTile from '../Layout/BookTile';
 
@@ -58,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 let getAuthorData =  async (authorID) => {
-    let authorData = await fetch('/api/author/' + authorID)
+    let authorData = await fetch('https://mostare1.pythonanywhere.com/api/author/' + authorID)
     .then(response => response.json())
     .then(data => (data.length > 0 ? data[0] : {noAuthor:true}) );
     
@@ -66,7 +67,7 @@ let getAuthorData =  async (authorID) => {
 }
 
 let getAuthorBooks = async (authorID) => {
-    let books = await fetch('/api/author/' + authorID + '/get-books')
+    let books = await fetch('https://mostare1.pythonanywhere.com/api/author/' + authorID + '/get-books')
     .then(response => response.json())
     .then(data => data);
     
@@ -90,7 +91,8 @@ export default function AuthorPage(props) {
 
     return(
         <div className={classes.root}>
-            {author === null || books === null ? null : author.noAuthor ? <>No author found</> :
+            {author === null || books === null ? <CircularProgress/> 
+            : author.noAuthor ? <>No author found</> :
                 <>
                 <Paper className={classes.paper}>
                     <Box 

@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 let getPublishers = async () => {
-    let publishers = await fetch('/api/admin/getpublishers')
+    let publishers = await fetch('https://mostare1.pythonanywhere.com/api/admin/getpublishers')
     .then(response => response.json())
     .then(data => data);
     
@@ -40,7 +40,7 @@ let getPublishers = async () => {
 }
 
 let deletePublishers = async (id) => {
-    let result = await fetch('/api/admin/deletepublishers/'+id)
+    let result = await fetch('https://mostare1.pythonanywhere.com/api/admin/deletepublishers/'+id)
     .then(response => response)
     .then(data => data);
     
@@ -55,7 +55,7 @@ let updatePublishers = async (data) => {
         body: JSON.stringify({...data})
     };
       
-    let results = fetch('api/admin/updatepublishers', requestOptions)
+    let results = fetch('https://mostare1.pythonanywhere.com/api/admin/updatepublishers', requestOptions)
     .then(response => response)
     .then(data => data);
 }
@@ -68,7 +68,7 @@ let addPublishers = async (data) => {
         body: JSON.stringify({...data})
     };
       
-    let results = fetch('api/admin/addpublishers', requestOptions)
+    let results = fetch('https://mostare1.pythonanywhere.com/api/admin/addpublishers', requestOptions)
     .then(response => response)
     .then(data => data);
 }

@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Grow from '@material-ui/core/Grow';
 import Fade from '@material-ui/core/Fade';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import BookTile from '../Layout/BookTile';
 
@@ -49,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 let getAllBooks = async () => {
-    let books = await fetch('/api/allbooks')
+    let books = await fetch('https://mostare1.pythonanywhere.com/api/allbooks')
     .then(response => response.json())
     .then(data => data);
     
@@ -76,7 +77,7 @@ export default function AllBooksPage(props) {
                     {books.length} Books
                 </Typography>
             </Fade>
-            {books.length === 0 ? <></> :
+            {books.length === 0 ? <CircularProgress/> :
                 <>
                 <Grow in={true}>
                     <Grid 

@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const getFavoriteCount = async (userID) => {
-    let count = await fetch('/api/favorite/user/count/' + userID)
+    let count = await fetch('https://mostare1.pythonanywhere.com/api/favorite/user/count/' + userID)
     .then(response => response.json())
     .then(data => data[0].count);
 

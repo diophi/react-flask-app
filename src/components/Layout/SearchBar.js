@@ -11,7 +11,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 
@@ -50,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 let getBook = async (searchQuery) => {
-    let book = await fetch('/api/short-search/' + searchQuery)
+    let book = await fetch('https://mostare1.pythonanywhere.com/api/short-search/' + searchQuery)
     .then(response => response.json())
     .then(data => data);
 
@@ -63,7 +62,7 @@ export default function SearchBar(){
 
     const [isTyping, setTyping] = React.useState(false);
     const [text, setText] = React.useState("");
-    const [results, setResults] = React.useState([]);
+    const [results, setResults] = React.useState(null);
 
     const handleTyping = (event) =>{
         setText(event.target.value);
@@ -104,6 +103,7 @@ export default function SearchBar(){
                     {isTyping ? (
                         <Fade in={isTyping}>
                         <Paper elevation={10} className={classes.searchListRoot}>
+                        {results === null? <></> :
                             <List component="nav" aria-label="search elements">
                             {results.map((book, index)=>(
                                 <ListItem 
@@ -140,6 +140,7 @@ export default function SearchBar(){
                                 </ListItem>
                             }
                             </List>
+                        }
                         </Paper>
                         </Fade>
                         ) : null

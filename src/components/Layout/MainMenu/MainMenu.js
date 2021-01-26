@@ -19,7 +19,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Box } from '@material-ui/core';
 
 let getAllGenres = async () => {
-    let genres = await fetch('/api/allgenres')
+    let genres = await fetch('https://mostare1.pythonanywhere.com/api/allgenres')
     .then(response => response.json())
     .then(data => data);
     
@@ -69,7 +69,7 @@ export default function MainMenu(props) {
 
 
     return(
-        <Box display="flex" flexDirection="column" style={{height:'100%'}}>
+        <Box display="flex" flexDirection="column" style={{height:'100%', overflowX:'hidden'}}>
             <List style={{width:240, flex:1}}>
             {menuList.map((item, index) => (
                 <ListItem 

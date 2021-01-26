@@ -17,12 +17,13 @@ import Grid from '@material-ui/core/Grid';
 import Fade from '@material-ui/core/Fade';
 import Grow from '@material-ui/core/Grow';
 import StarIcon from '@material-ui/icons/Star';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { Link, useLocation } from "react-router-dom";
 
 
 let getPublishers=  async () => {
-    let publishers = await fetch('/api/homepage/popularpublishers')
+    let publishers = await fetch('https://mostare1.pythonanywhere.com/api/homepage/popularpublishers')
     .then(response => response.json())
     .then(data => data );
     
@@ -30,7 +31,7 @@ let getPublishers=  async () => {
 }
 
 let getBooks = async () => {
-    let books = await fetch('/api/homepage/highratedbooks')
+    let books = await fetch('https://mostare1.pythonanywhere.com/api/homepage/highratedbooks')
     .then(response => response.json())
     .then(data => data);
     
@@ -91,7 +92,7 @@ export default function HomePage(props){
                 <Typography variant="h4" className={classes.title}>
                     High Rated Books
                 </Typography>
-                {books.length === 0 ? <></> :
+                {books.length === 0 ? <CircularProgress/> :
                     <>
                     <Grow in={true}>
                         <Grid 
@@ -150,6 +151,7 @@ export default function HomePage(props){
                 >
                     Popular Publishers
                 </Typography>
+                {publishers.length === 0? <CircularProgress/> : null}
                 <Fade in={true}>
                 <List>
                     {publishers.map((publisher, index) => (

@@ -1,13 +1,14 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import BookBlock from './BookBlock';
 import RecommendedBooks from './RecommendedBooks';
 
 
 let getAuthors = async (bookID) => {
-    let authors = await fetch('/api/book-authors/' + bookID)
+    let authors = await fetch('https://mostare1.pythonanywhere.com/api/book-authors/' + bookID)
     .then(response => response.json())
     .then(data => data);
     
@@ -15,7 +16,7 @@ let getAuthors = async (bookID) => {
 }
 
 let getRating = async (bookID) => {
-    let rating = await fetch('/api/book-rating/' + bookID)
+    let rating = await fetch('https://mostare1.pythonanywhere.com/api/book-rating/' + bookID)
     .then(response => response.json())
     .then(data => data.length > 0 ? data[0].rating : 'None');
     
@@ -24,7 +25,7 @@ let getRating = async (bookID) => {
 
 let getBookJSON = async (bookID) => {
 
-    let bookData = await fetch('/api/book/' + bookID)
+    let bookData = await fetch('https://mostare1.pythonanywhere.com/api/book/' + bookID)
     .then(response => response.json())
     .then(data => data.length > 0 ? data[0] : Object.create({noBook:true}));
 
@@ -43,12 +44,17 @@ export default function BookPage(props) {
     
     React.useEffect(()=>{
         getBookJSON(bookID).then(data => {setBookData(data);});
+
+        return () => {setBookData(null);}
     },[bookID]);
     
     return(
         <div>
         { 
-            bookData === null? null:
+            bookData === null? 
+            <div style={{paddingLeft:'15%', paddingTop:'5%'}}>
+                <CircularProgress/>
+            </div>:
             bookData.noBook?
             <p style={{marginTop:120, marginLeft:50}}>
                 Book not found

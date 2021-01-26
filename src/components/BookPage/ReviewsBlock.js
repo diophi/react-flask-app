@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const getReviews = async (bookID) => {
-    let reviews = await fetch('/api/review/'+bookID)
+    let reviews = await fetch('https://mostare1.pythonanywhere.com/api/review/'+bookID)
     .then(response => response.json())
     .then(data => data);
 

@@ -9,6 +9,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { Typography } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import Fade from '@material-ui/core/Fade';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { Link, useLocation } from "react-router-dom";
 
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 let getAuthors =  async () => {
-    let authors = await fetch('/api/allauthors')
+    let authors = await fetch('https://mostare1.pythonanywhere.com/api/allauthors')
     .then(response => response.json())
     .then(data => data );
     
@@ -65,6 +66,7 @@ export default function AllAuthorsPage(props) {
             >
                 All Authors
             </Typography>
+            {authors.length === 0 ? <CircularProgress/> : <></>}
             <Fade in={true}>
             <List>
                 {authors.map((author, index) => (

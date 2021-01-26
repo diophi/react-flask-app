@@ -49,7 +49,7 @@ const uploadReview = async (reviewData) => {
       body: JSON.stringify(reviewData)
     };
     
-    await fetch('/api/add-review', requestOptions);
+    await fetch('https://mostare1.pythonanywhere.com/api/add-review', requestOptions);
           
 }
 
@@ -74,10 +74,8 @@ export default function WriteReviewDialog(props) {
 		reviewData.bookID = bookData.bookID;
 		reviewData.likes = 0;
 		reviewData.date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
-		console.log(reviewData);
-		uploadReview(reviewData);
+		uploadReview(reviewData).then(() => props.updateReviews());
 		setOpen(false);
-		props.updateReviews();
 	}
 
 	return (

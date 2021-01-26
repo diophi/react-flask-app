@@ -96,7 +96,7 @@ export default function SignInSide(props) {
       body: JSON.stringify({ username: currUser.username, password: currUser.password})
     };
     
-    fetch('/api/login', requestOptions)
+    fetch('https://mostare1.pythonanywhere.com/api/login', requestOptions)
           .then(response => response.json())
           .then(data =>{ 
             data.length > 0 ? props.setUser(data[0]): setError(true);

@@ -2,7 +2,7 @@ from flask import jsonify
 from flask import Flask,  request
 from flask_mysqldb import MySQL
 
-app = Flask(__name__, static_folder='../build', static_url_path='/')
+app = Flask(__name__)
 
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] ='root'
@@ -12,9 +12,6 @@ app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 mysql = MySQL(app)
 
-@app.route('/')
-def index():
-    return app.send_static_file('index.html')
 
 #AUTHORS =============================================================================
 #gets info about an author

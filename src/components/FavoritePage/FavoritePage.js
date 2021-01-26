@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 let getFavoriteBooks = async (userID) => {
-    let favorites = await fetch('/api/favorite/user/' + userID)
+    let favorites = await fetch('https://mostare1.pythonanywhere.com/api/favorite/user/' + userID)
     .then(response => response.json())
     .then(data => data);
     

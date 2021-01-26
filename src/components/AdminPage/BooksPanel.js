@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 let getBooks = async () => {
-    let books = await fetch('/api/admin/getbooks')
+    let books = await fetch('https://mostare1.pythonanywhere.com/api/admin/getbooks')
     .then(response => response.json())
     .then(data => data);
     
@@ -53,7 +53,7 @@ let getBooks = async () => {
 }
 
 let deleteBooks = async (id) => {
-    let result = await fetch('/api/admin/deletebooks/'+id)
+    let result = await fetch('https://mostare1.pythonanywhere.com/api/admin/deletebooks/'+id)
     .then(response => response)
     .then(data => data);
     
@@ -148,7 +148,7 @@ export default function GenresPanel() {
 }
 
 let getAuthors = async () => {
-    let books = await fetch('/api/admin/getauthors')
+    let books = await fetch('https://mostare1.pythonanywhere.com/api/admin/getauthors')
     .then(response => response.json())
     .then(data => data);
     
@@ -156,7 +156,7 @@ let getAuthors = async () => {
 }
 
 let getPublishers = async () => {
-    let books = await fetch('/api/admin/getpublishers')
+    let books = await fetch('https://mostare1.pythonanywhere.com/api/admin/getpublishers')
     .then(response => response.json())
     .then(data => data);
     
@@ -164,7 +164,7 @@ let getPublishers = async () => {
 }
 
 let getGenres = async () => {
-    let books = await fetch('/api/admin/getgenres')
+    let books = await fetch('https://mostare1.pythonanywhere.com/api/admin/getgenres')
     .then(response => response.json())
     .then(data => data);
     
@@ -189,17 +189,17 @@ let addBook = async (bookData, publisher, authors, genres) => {
         body: JSON.stringify({...bookData})
     };
         
-    fetch('api/admin/addbooks', requestOptions)
+    fetch('https://mostare1.pythonanywhere.com/api/admin/addbooks', requestOptions)
     .then(response => response.json())
     .then(data => {
         bookID = data[0].bookID;
         console.log(bookID);
         authors.forEach((author)=>{
-         fetch('api/admin/authorbond/'+ bookID +'/'+author.authorID);
+         fetch('https://mostare1.pythonanywhere.com/api/admin/authorbond/'+ bookID +'/'+author.authorID);
         })
 
         genres.forEach((genre)=>{
-            fetch('/api/admin/genrebond/'+ bookID +'/'+genre.genreID);
+            fetch('https://mostare1.pythonanywhere.com/api/admin/genrebond/'+ bookID +'/'+genre.genreID);
         })
     });
 

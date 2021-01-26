@@ -40,11 +40,7 @@ export default function Review(props){
     const data = props.data;
 
     let getShortDate =  () => {
-        const date = new Date(data.date);
-        let day = date.getDay();
-        let month = date.getMonth();
-        let year = date.getFullYear();
-        return day+'/'+month+'/'+year;
+        return data.date.substring(0, data.date.length - 12);
     }
 
     return(
