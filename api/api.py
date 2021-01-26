@@ -14,7 +14,7 @@ mysql = MySQL(app)
 
 
 #AUTHORS =============================================================================
-#gets info about an author
+#gets all info about an author
 @app.route('/api/author/<int:id>', methods=['GET'])
 def author_getbooks(id):
     authorID = str(id)
@@ -79,7 +79,7 @@ def publisher_getinfo(id):
     results = cur.fetchall()
     return jsonify(results)
 
-#gets all books of a publisher
+#gets all books(+an author for each) of a publisher
 @app.route('/api/publisher/<int:id>/get-books', methods=['GET'])
 def publisher_getbooks(id):
     publisherID = str(id)
@@ -98,7 +98,7 @@ def publisher_getbooks(id):
 
 
 #BOOKS ====================================================================================================
-#gets all information about books, including coresponding info from other tables through foreign keys
+#gets all information about a book + plus its publisher, 
 @app.route('/api/book/<int:id>', methods=['GET'])
 def get_book(id):
     bookID = str(id)
@@ -109,6 +109,7 @@ def get_book(id):
     results = cur.fetchall()
     return jsonify(results)
 
+#gets the average rating of a book
 @app.route('/api/book-rating/<int:id>', methods=['GET'])
 def get_bookrating(id):
     bookID = str(id)
@@ -148,7 +149,7 @@ def get_allbooks():
     return jsonify(results)
 
 #GENRES ================================================================================================= 
-#get all genres
+#gets all genres
 @app.route('/api/allgenres', methods=['GET'])
 def get_allgenres():
     cur = mysql.connection.cursor()
@@ -156,7 +157,7 @@ def get_allgenres():
     results = cur.fetchall()
     return jsonify(results)
 
-#get all books of a selected genre
+#gets all books of a selected genre from a list (search by name) + author
 @app.route('/api/genres/<name>', methods=['GET'])
 def get_booksfromgenre(name):
     cur = mysql.connection.cursor()
@@ -179,7 +180,7 @@ def get_booksfromgenre(name):
     return jsonify(results)
 
 
-#get all genres of a book
+#gets all genres of a book
 @app.route('/api/genres-book/<id>', methods=['GET'])
 def get_bookgenres(id):
     cur = mysql.connection.cursor()
@@ -188,7 +189,8 @@ def get_bookgenres(id):
     results = cur.fetchall()
     return jsonify(results)
 
-#get recommended books based on their genres
+#gets recommended books (max 4) based on their genres (must have at least one common genre)
+#random
 @app.route('/api/recommended/<bookID>', methods=['GET'])
 def get_recommended(bookID):
     cur = mysql.connection.cursor()
@@ -355,7 +357,7 @@ def signup():
         return 'done'
     else:
         return
-
+#checks if the username already exists (for signing up)
 @app.route('/api/checkuser/<username>', methods=['GET'])
 def checkuser(username):
     cur = mysql.connection.cursor()
@@ -366,7 +368,7 @@ def checkuser(username):
     return jsonify(results)
 
 #HOMEPAGE ===============================================================================
-#high rated 8 books
+#gets the highest rated 8 books based on the average rating
 @app.route('/api/homepage/highratedbooks', methods=['GET'])
 def get_highratedbooks():
     cur = mysql.connection.cursor()
@@ -384,9 +386,7 @@ def get_highratedbooks():
     results = cur.fetchall()
     return jsonify(results)
 
-
-
-#return the 3 most popular publishers
+#return the 3 most popular publishers based on their count of reviews for each book
 @app.route('/api/homepage/popularpublishers', methods=['GET'])
 def get_popularpublishers():
     cur = mysql.connection.cursor()
@@ -405,6 +405,8 @@ def get_popularpublishers():
 
 #ADMIN ============================================================================================
 # -- authors panel
+
+#get authors
 @app.route('/api/admin/getauthors', methods=['GET'])
 def admin_getauthors():
     cur = mysql.connection.cursor()
@@ -412,6 +414,7 @@ def admin_getauthors():
     results = cur.fetchall()
     return jsonify(results)
 
+#delete an author
 @app.route('/api/admin/deleteauthors/<id>', methods=['GET'])
 def admin_deleteauthors(id):
     cur = mysql.connection.cursor()
@@ -458,6 +461,7 @@ def admin_addauthors():
         return 
 
 # -- publishers panel
+#gets all publishers
 @app.route('/api/admin/getpublishers', methods=['GET'])
 def admin_getpublishers():
     cur = mysql.connection.cursor()
@@ -465,6 +469,7 @@ def admin_getpublishers():
     results = cur.fetchall()
     return jsonify(results)
 
+#delete a publisher
 @app.route('/api/admin/deletepublishers/<id>', methods=['GET'])
 def admin_deletepublishers(id):
     cur = mysql.connection.cursor()
@@ -514,6 +519,7 @@ def admin_addpublishers():
         return 
 
 # -- genres panel
+#gets genres
 @app.route('/api/admin/getgenres', methods=['GET'])
 def admin_getgenres():
     cur = mysql.connection.cursor()
@@ -521,6 +527,7 @@ def admin_getgenres():
     results = cur.fetchall()
     return jsonify(results)
 
+#delete a genre
 @app.route('/api/admin/deletegenres/<id>', methods=['GET'])
 def admin_deletegenres(id):
     cur = mysql.connection.cursor()
@@ -562,6 +569,7 @@ def admin_addgenres():
         return 
 
 # -- books panel
+#gets all books plus all its authors plus all its genres and the publisher name
 @app.route('/api/admin/getbooks', methods=['GET'])
 def admin_getbooks():
     cur = mysql.connection.cursor()
